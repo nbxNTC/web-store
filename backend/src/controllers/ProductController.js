@@ -43,7 +43,7 @@ module.exports = {
         return res.json({ id });
     },
     async delete(req, res) {
-        const { id } = req.params;
+        const { id } = req.params;               
 
         await connection('products')
             .where('id', id)
@@ -53,12 +53,13 @@ module.exports = {
     },
     async update(req, res) {
         const { id } = req.params;
+        const { title, value } = req.body;
 
         await connection('products')
             .where('id', id)
             .update({
-                'title': 'testeUpdate',
-                'value': 20
+                'title': title,
+                'value': value
             });
 
         return res.status(204).send();
