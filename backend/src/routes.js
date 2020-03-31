@@ -4,9 +4,12 @@ const ProductController = require('./controllers/ProductController');
 const OrderController = require('./controllers/OrderController');
 const ProfileController = require('./controllers/ProfileController');
 const AdminController = require('./controllers/AdminController');
+const SessionController = require('./controllers/SessionController');
 
 
 const routes = express.Router();
+
+routes.post('/sessions', SessionController.create);
 
 routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.create);

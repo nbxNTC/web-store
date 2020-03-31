@@ -1,0 +1,77 @@
+.products-container {
+  width: 100%;
+  max-width: 1120px;  
+  margin: 32px auto;
+}
+
+.products-container header {  
+  display: flex;  
+  align-items: center;
+}
+
+.products-container header span{
+  font-size: 17px;
+  margin-left: 50px;
+}
+
+.products-container header img {
+  width: 10%;
+}
+
+.products-container header button {
+  height: 50px;
+  width: 50px;
+  margin-left: 15px;
+  border-radius: 8px;
+  border: 1px solid #9400d3;
+  background: transparent;  
+  transition: filter 0.2s;
+}
+
+.products-container header button:first-of-type {
+  margin-left: auto;
+}
+
+.products-container header button:hover {
+  filter: brightness(0.6);
+}
+
+.products-container h1 {
+  font-size: 32px;
+  margin-top: 70px;
+  margin-bottom: 25px;  
+}
+
+.products-container ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 24px;
+  list-style: none;
+}
+
+.products-container ul li {  
+  padding: 55px;
+  border-radius: 4px;
+  transition: all 0.2s;
+
+  display: block;   
+}
+
+.products-container ul li:hover {    
+  background-color: rgb(214, 214, 214);
+}
+
+.products-container ul li strong {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 10px;  
+  font-size: 20px;
+  font-weight: normal;
+  color: #333;  
+}
+
+.products-container ul li p {
+  color: #333;
+  font-weight: bold;
+  font-size: 30px;
+}
