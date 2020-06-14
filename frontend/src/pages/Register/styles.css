@@ -29,12 +29,13 @@
 .register-container .content section h1 {
   font-size: 40px;
   font-weight: bold;
-  margin: 64px 0 32px;
+  margin: 64px 0 16px;
 }
 
 .register-container .content section p {
   font-size: 17px;
-  color: dimgrey;
+  margin-bottom: 16px;
+  color: rgb(75, 75, 75);
 }
 
 .register-container .content form {
@@ -42,15 +43,108 @@
   max-width: 400px;  
 }
 
-.register-container .content form input {
+.register-container .content form input, 
+.register-container .content form .row-2 .field {
   margin-top: 20px;
 }
 
 .register-container .content form .row-2 {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  
 }
 
-.register-container .content form .row-2 input + input {
+.register-container .content form .row-2 .field .field-select{
+  width: 192px;
+}
+
+.register-container .content form .row-2 .field + .field {
   margin-left: 8px;
 }
+
+.register-container .content form .row-2 .field .field-select option {
+  color: #333;
+}
+
+.sucess-hide {
+  opacity: 0%;
+  position: fixed;
+}
+
+.sucess-show {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: black;
+  opacity: 90%;  
+  transition-duration: 1s;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sucess-show .content{
+  width: 40%;
+  padding: 90px;
+  margin:  auto 0px;
+  color: #fff;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sucess-show .content h1 {
+  margin: 20px 0px;
+}
+
+.sucess-show .content button {
+  width: 150px;
+  margin-top: 30px;
+}
+
+.failed-hide {
+  opacity: 0%;
+  position: fixed;
+}
+
+.failed-show {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: black;
+  opacity: 90%;  
+  transition-duration: 1s;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.failed-show .content{
+  width: 40%;
+  padding: 90px;
+  margin:  auto 0px;
+  color: #fff;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.failed-show .content h1 {
+  margin: 20px 0px;
+}
+
+.failed-show .content button {
+  width: 200px;
+  margin-top: 30px;
+}
+
+
+
+

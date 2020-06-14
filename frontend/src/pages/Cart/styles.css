@@ -6,53 +6,65 @@
 
 .cart-container header {  
   display: flex;  
-  align-items: center;  
+  align-items: center;
+  justify-content: space-between;  
 }
 
-.cart-container header span{
+.cart-container header .left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cart-container header .left img {
+  width: 100px;
+}
+
+.cart-container header .left span {
   font-size: 17px;
-  margin-left: 50px;
+  margin: 0 50px;
 }
 
-.cart-container header .back-link{  
-  margin-left: 60%;  
-}
-
-.cart-container header img {
-  width: 10%;
+.cart-container header .right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .cart-container header button {
   height: 50px;
-  width: 50px;
+  /* width: 150px;   */
+  padding: 0 10px;
   margin-left: 15px;
-  border-radius: 8px;
-  border: 1px solid #9400d3;
-  background: transparent;  
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
   transition: filter 0.2s;
 }
-
 .cart-container header button:hover {
-  filter: brightness(0.6);
-} 
+  filter: brightness(0.8);
+}
 
-.cart-container header button:first-of-type {
-  margin-left: auto;
+.cart-container header button span {  
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .cart-container h1 {
   font-size: 32px;
   margin-top: 70px;
-  margin-bottom: 25px;  
-  text-align: center;
+  margin-bottom: 35px;    
 }
 
 .cart-container ul {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   list-style: none;  
-  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-  padding: 45px;
+  /* box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); */
+  /* padding: 45px; */
 }
 
 .cart-container ul .cart-properties {
@@ -60,8 +72,9 @@
   height: 60px;
   padding: 25px;
   color: #333;
-  font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.050);
+  font-weight: bold;  
+  background: #ececec; 
+  border-radius: 10px;
 
   display: flex;
   align-items: center;
@@ -78,6 +91,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.cart-container ul li img {
+  border-radius: 8px;
+  width: 8%;
 }
 
 .cart-container ul li p {
@@ -98,3 +116,20 @@
   filter: brightness(0.6);
 } 
 
+.cart-container ul .cart-properties .total-value {
+  font-weight: 400;
+}
+
+.cart-container ul .btn {
+  width: 100%;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.cart-container ul .btn button {
+  width: 200px;
+  margin-left: 24px;
+  margin-bottom: 24px;
+}

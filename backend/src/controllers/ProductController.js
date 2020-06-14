@@ -34,10 +34,11 @@ module.exports = {
         }
     },    
     async create(req, res) {
-        const { title, value, imgURL } = req.body;
+        const { title, value, plataform, imgURL } = req.body;
         const [id] = await connection('products').insert({
             title,
             value,
+            plataform,
             imgURL
         });        
         return res.json({ id });
@@ -53,12 +54,13 @@ module.exports = {
     },
     async update(req, res) {
         const { id } = req.params;
-        const { title, value } = req.body;
+        const { title, value, plataform } = req.body;
 
         await connection('products')
             .where('id', id)
             .update({
                 'title': title,
+                'plataform': plataform,
                 'value': value
             });
 

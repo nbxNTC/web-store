@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiPower, FiShoppingCart } from 'react-icons/fi';
 
 import api from '../../services/api';
@@ -13,7 +13,7 @@ export default function Products() {
   
   const [products, setProducts] = useState([]);
 
-  const cart = [];
+  // const [cart, setCart] = useState([]);
 
   const user_id = localStorage.getItem('user_id');
   const user_name = localStorage.getItem('user_name');
@@ -26,11 +26,7 @@ export default function Products() {
     }).then(response => {
       setProducts(response.data);
     })
-  }, [user_id]);
-
-  function handleCart() {
-    history.push('/cart');
-  }
+  }, [user_id]);  
 
   function handleLogout() {
     localStorage.clear();
@@ -44,43 +40,53 @@ export default function Products() {
     }    
   }
 
-  async function handleAddToCart(product) {
-    try {
-      cart.push(product);      
-      console.log(cart);  
-    } catch (error) {
-      alert('Erro ao comprar produto, tente novamente.');
-    }
-  }
+  // async function handleCart(product) {
+    
+  // }
 
   return (
     <div onLoad={handleSession} className="products-container">
       <header>
-        <img src={logoImg} alt="Web Store" width="10%"/>
-        <span>Bem vindo(a), {user_name}</span>      
-        <button onClick={handleCart} type="button">
-            <FiShoppingCart size="18" color="#9400d3" />
-        </button>  
-        <button onClick={handleLogout} type="button">
-            <FiPower size="18" color="#9400d3" />
-        </button>
+        <div className="left">
+          <img src={logoImg} alt="Web Store" width="10%"/>
+          <span>Bem vindo(a), {user_name}</span>      
+        </div>
+        <div className="right">
+          <button onClick={() => { history.push('/cart') }} type="button" style={ {width: 130} }>
+              <FiShoppingCart size="18" color="#fff" />
+              <span>
+                Carrinho
+              </span>
+          </button>
+          <button onClick={handleLogout} type="button" style={ {width: 90} }>
+              <FiPower size="18" color="#fff" />
+              <span>
+                Sair
+              </span>
+          </button>
+        </div>
       </header>
 
       <h1>Produtos</h1>
 
-      <ul>
+      <ul className="items-grid">
         {products.map(product => (
-          <li key={product.id}>          
+          <li key={product.id} className="item">          
             <img 
-              src="https://a-static.mlcdn.com.br/618x463/god-of-war-iii-remasterizado-ps4-sony/variadocombr/0711719501336/7560b57fd796f9b9798e161319684022.jpg" 
-              width="80%"
+              src={product.imgURL} 
+              alt="produto"              
             />
-
-            <strong>{product.title}</strong>
-
-            <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.value)}</p>   
-
-            <button onClick={() => handleAddToCart(product)} type="button">Comprar</button>       
+            <div className="item-description">
+              <h1>{product.title}</h1>
+              <h2>{product.plataform}</h2>
+              <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.value)}</p>   
+            </div>
+            <button 
+              onClick={() => {}} 
+              type="button"
+            >              
+              Comprar 
+            </button>       
           </li>  
         ))}
       </ul>
