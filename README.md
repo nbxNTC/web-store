@@ -1,8 +1,8 @@
 # Web Store
 
-<img src="imgs/register.gif" alt="register" width="250">
+<img src="imgs/register.gif" alt="register" width="450">
 
-<img src="imgs/cart.gif" alt="register" width="250">
+<img src="imgs/cart.gif" alt="register" width="450">
 
 ## Sobre o Projeto
  
