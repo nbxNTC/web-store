@@ -10,8 +10,12 @@
 body {
   font-size: 15px;
   font-family: Roboto, sans-serif;
-  background: #d9d9dd;
+  background: #ecedf2;
   -webkit-font-smoothing: antialiased;
+}
+
+ToastProvider {
+  background-color: black;
 }
 
 input, button, select {

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiPower, FiShoppingCart } from 'react-icons/fi';
+import { useToasts } from 'react-toast-notifications';
+
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../store/cart';
 
 import api from '../../services/api';
 
@@ -8,12 +12,14 @@ import './styles.css';
 
 import logoImg from '../../assets/logo.png';
 
-export default function Products() {
+const Products = () => {
   const history = useHistory();
-  
-  const [products, setProducts] = useState([]);
 
-  // const [cart, setCart] = useState([]);
+  const { addToast } = useToasts()
+
+  const dispatch = useDispatch(); 
+  
+  const [products, setProducts] = useState([]);  
 
   const user_id = localStorage.getItem('user_id');
   const user_name = localStorage.getItem('user_name');
@@ -40,9 +46,15 @@ export default function Products() {
     }    
   }
 
-  // async function handleCart(product) {
-    
-  // }
+  async function handleAddCart(product) {    
+    const amount = 1;
+    const item = {
+      product,
+      amount
+    }
+    dispatch(addProduct(item));  
+    addToast('Adicionado ao Carrinho', { appearance: 'success' });
+  }
 
   return (
     <div onLoad={handleSession} className="products-container">
@@ -71,25 +83,31 @@ export default function Products() {
 
       <ul className="items-grid">
         {products.map(product => (
-          <li key={product.id} className="item">          
-            <img 
-              src={product.imgURL} 
-              alt="produto"              
-            />
+          <li key={product.id} className="item">
+            <div className="item-img">
+              <img 
+                src={product.imgURL} 
+                alt="produto"              
+              />
+            </div>                      
             <div className="item-description">
               <h1>{product.title}</h1>
               <h2>{product.plataform}</h2>
               <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.value)}</p>   
+              <button 
+                onClick={() => handleAddCart(product)} 
+                type="button"
+                className="btn-buy"
+              >              
+                Comprar 
+              </button> 
             </div>
-            <button 
-              onClick={() => {}} 
-              type="button"
-            >              
-              Comprar 
-            </button>       
+                  
           </li>  
         ))}
       </ul>
     </div>
   );
 }
+
+export default Products;

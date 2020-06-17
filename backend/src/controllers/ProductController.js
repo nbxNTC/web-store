@@ -54,15 +54,35 @@ module.exports = {
     },
     async update(req, res) {
         const { id } = req.params;
-        const { title, value, plataform } = req.body;
-
-        await connection('products')
+        const { title, value, plataform, imgURL } = req.body;
+        if (title) {
+            await connection('products')
             .where('id', id)
             .update({
-                'title': title,
-                'plataform': plataform,
-                'value': value
+                'title': title,               
             });
+        }
+        if (plataform) {
+            await connection('products')
+            .where('id', id)
+            .update({
+                'plataform': plataform,                
+            });
+        }
+        if (value) {
+            await connection('products')
+            .where('id', id)
+            .update({
+                'value': value,                
+            });
+        }
+        if (imgURL) {
+            await connection('products')
+            .where('id', id)
+            .update({
+                'imgURL': imgURL,                
+            });
+        }        
 
         return res.status(204).send();
     }

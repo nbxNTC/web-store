@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { FiPower, FiTrash, FiArrowLeft } from 'react-icons/fi';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { FiPower, FiTrash, FiArrowLeft, FiPlus, FiMinus } from 'react-icons/fi';
 
-import api from '../../services/api';
+import { useSelector, useDispatch } from 'react-redux';
+import { addProduct, removeProduct, removeOneProduct, removeAllProducts } from '../../store/cart';
 
 import './styles.css';
-
 import logoImg from '../../assets/logo.png';
 
-export default function Cart() {
+const Cart = () => {
   const history = useHistory();
-  
-  const [products, setProducts] = useState([]);  
 
-  const user_id = localStorage.getItem('user_id');
-  const user_name = localStorage.getItem('user_name');
+  const dispatch = useDispatch(); 
 
-  useEffect(() => {
-    api.get('products', {
-      headers: {
-        Authorization: user_id,
-      }
-    }).then(response => {
-      setProducts(response.data);
-    })
-  }, [user_id]);
+  const cart = useSelector(state => state.cart);     
+
+  const user_name = localStorage.getItem('user_name');  
 
   function handleLogout() {
     localStorage.clear();
@@ -37,6 +28,27 @@ export default function Cart() {
       history.push('/');
     }    
   }  
+
+  function handleAddCart(product) {
+    const amount = 1;
+    const item = {
+      product,
+      amount
+    }
+    dispatch(addProduct(item));    
+  }
+
+  function handleRemoveCart(id) {
+    dispatch(removeProduct(id));
+  }
+
+  function handleRemoveOneCart(id) {
+    dispatch(removeOneProduct(id));
+  }
+
+  function handleRemoveAllCart() {
+    dispatch(removeAllProducts());
+  }
 
   return (
     <div onLoad={handleSession} className="cart-container">
@@ -70,29 +82,48 @@ export default function Cart() {
           <span>QUANTIDADE</span>
           <span>REMOVER</span>
         </div>
-        {products.map(product => (
-          <li key={product.id}>          
-            <img 
-              src={product.imgURL} 
-              alt="produto"              
-            />
+        {cart.cart.map(item => (
+          <li key={item.product.id}> 
+            <div className="product">
+              <img 
+                src={item.product.imgURL} 
+                alt="produto"              
+              />
 
-            <p>{product.title}</p>
+              <p>{item.product.title}</p>
 
-            <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.value)}</p>   
-            <p>1</p>
-            <button onClick={() => {}} type="button">
-                <FiTrash size="15" color="#494949" />
-            </button>    
-          </li>  
-        ))}
-        <div className="cart-properties">          
+              <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.product.value)}</p>   
+              <div className="amount">
+                <button onClick={() => handleAddCart(item.product)} type="button">
+                    <FiPlus size="15" color="#494949" />
+                </button> 
+                <p>{item.amount}</p>
+                <button onClick={() => handleRemoveOneCart(item.product.id)} type="button">
+                    <FiMinus size="15" color="#494949" />
+                </button> 
+              </div>
+              <button onClick={() => handleRemoveCart(item.product.id)} type="button">
+                  <FiTrash size="15" color="#494949" />
+              </button> 
+            </div>   
+          </li>    
+        ))} 
+        { cart.cart.length === 0 ?
+          (
+            <div className="product empty">
+              <p>O seu carrinho está vazio :(</p>
+            </div>   
+          ) : null
+        }        
+        <div className="cart-properties bottom">          
           <span className="total">TOTAL:</span>
-          <span className="total-value">R$2000,00</span>
+          <span className="total-value">
+            {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(cart.totalValue)}
+          </span>
         </div>
         <div className="btn">
           <button 
-            onClick={() => {}} 
+            onClick={() => handleRemoveAllCart()} 
             type="button" 
           >              
             Limpar Carrinho
@@ -108,3 +139,5 @@ export default function Cart() {
     </div>
   );
 }
+
+export default Cart;
