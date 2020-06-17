@@ -1,12 +1,17 @@
 # Web Store
 
-## Objetivo
+<img src="imgs/register.gif" alt="register" width="250">
+
+<img src="imgs/cart.gif" alt="register" width="250">
+
+## Sobre o Projeto
  
-Este projeto tem o objetivo de aplicar os conhecimentos aprendidos na Semana OmniStack 11 da Rocketseat, utilizando as tecnologias mais usadas do mercado.
+Um marketplace de jogos em que o usuário pode comprar e vender jogos. Este projeto foi desenvolvido utilizando as tecnologias NodeJS/Express como back-end e React/Redux como front-end/web.
 
 ## Tecnologias
 
 - NodeJS
+- Express
 - React
-- React Native
+- Redux
 - SQLite
