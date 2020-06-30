@@ -50,6 +50,10 @@ const Cart = () => {
     dispatch(removeAllProducts());
   }
 
+  async function handleCheckOut() {
+    
+  }
+
   return (
     <div onLoad={handleSession} className="cart-container">
       <header>
@@ -129,7 +133,7 @@ const Cart = () => {
             Limpar Carrinho
           </button> 
           <button 
-            onClick={() => {}} 
+            onClick={() => handleCheckOut()} 
             type="button"          
           >              
             Finalizar Pedido 

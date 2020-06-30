@@ -1,0 +1,44 @@
+.item-img img {
+  height: 210px;
+  width: 100%;  
+
+  border-radius: 16px;  
+
+  transition: filter 0.2s;
+}
+
+.item-img img:hover {
+  filter: opacity(90%);
+}
+
+.item-description {    
+  width: 100%;  
+  padding: 40px;  
+
+  display: flex;
+  flex-direction: column;   
+}
+
+.item-description h1 {  
+  margin: 0;  
+
+  font-weight: 800;
+  font-size: 25px;
+}
+
+.item-description h2 {  
+  color: gray;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.item-description p {
+  margin-top: 35px;
+
+  font-weight: 500;
+  font-size: 30px;  
+}
+
+.btn-buy {
+  background-color: rgb(11, 114, 37);
+}

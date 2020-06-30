@@ -1,0 +1,14 @@
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  list-style: none;
+}
+
+.items-grid .item {  
+  min-height: 400px;
+  
+  background: #ffffff;  
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.452);
+  border-radius: 16px;
+}

@@ -1,38 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiPower, FiShoppingCart } from 'react-icons/fi';
-import { useToasts } from 'react-toast-notifications';
-
-import { useDispatch } from 'react-redux';
-import { addProduct } from '../../store/cart';
-
-import api from '../../services/api';
 
 import './styles.css';
 
 import logoImg from '../../assets/logo.png';
 
+import ProductList from '../../components/ProductList';
+
 const Products = () => {
-  const history = useHistory();
+  const history = useHistory(); 
 
-  const { addToast } = useToasts()
-
-  const dispatch = useDispatch(); 
-  
-  const [products, setProducts] = useState([]);  
-
-  const user_id = localStorage.getItem('user_id');
   const user_name = localStorage.getItem('user_name');
-
-  useEffect(() => {
-    api.get('products', {
-      headers: {
-        Authorization: user_id,
-      }
-    }).then(response => {
-      setProducts(response.data);
-    })
-  }, [user_id]);  
 
   function handleLogout() {
     localStorage.clear();
@@ -44,17 +23,7 @@ const Products = () => {
       localStorage.clear();
       history.push('/');
     }    
-  }
-
-  async function handleAddCart(product) {    
-    const amount = 1;
-    const item = {
-      product,
-      amount
-    }
-    dispatch(addProduct(item));  
-    addToast('Adicionado ao Carrinho', { appearance: 'success' });
-  }
+  }  
 
   return (
     <div onLoad={handleSession} className="products-container">
@@ -81,31 +50,8 @@ const Products = () => {
 
       <h1>Produtos</h1>
 
-      <ul className="items-grid">
-        {products.map(product => (
-          <li key={product.id} className="item">
-            <div className="item-img">
-              <img 
-                src={product.imgURL} 
-                alt="produto"              
-              />
-            </div>                      
-            <div className="item-description">
-              <h1>{product.title}</h1>
-              <h2>{product.plataform}</h2>
-              <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.value)}</p>   
-              <button 
-                onClick={() => handleAddCart(product)} 
-                type="button"
-                className="btn-buy"
-              >              
-                Comprar 
-              </button> 
-            </div>
-                  
-          </li>  
-        ))}
-      </ul>
+      <ProductList/>
+      
     </div>
   );
 }
