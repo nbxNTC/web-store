@@ -1,11 +1,11 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('products', function(table) {
-        table.increments();         
+        table.increments('id').primary();         
         table.string('title').notNullable(); 
         table.string('plataform').notNullable(); 
         table.decimal('value').notNullable(); 
-        table.string('imgURL').notNullable();     
+        table.string('image').notNullable();     
     });
 };
 

@@ -7,7 +7,7 @@ const ProductCard = ({product, handleAddCart}) => {
     <>
       <div className="item-img">
         <img 
-          src={product.imgURL} 
+          src={product.image} 
           alt="produto"              
         />
       </div>                      

@@ -33,7 +33,7 @@ const Login = () =>{
         })
       }, []);
 
-    useEffect(() => {
+      useEffect(() => {
         if (uf === '0') {
             return;
         }

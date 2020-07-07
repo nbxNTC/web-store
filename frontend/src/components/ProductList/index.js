@@ -9,7 +9,7 @@ import './styles.css'
 
 import ProductCard from '../../components/ProductCard';
 
-const ProductList = () => {
+const ProductList = ({ title, order, page }) => {  
   
   const [products, setProducts] = useState([]);  
 
@@ -19,13 +19,19 @@ const ProductList = () => {
 
   useEffect(() => {
     api.get('products', {
+      params: {
+        'title': title,
+        'order': order,
+        'pages': page
+      },
       headers: {
         Authorization: user_id,
       }
-    }).then(response => {
+    }).then(response => {           
+      console.log(response.headers);
       setProducts(response.data);
     })
-  }, [user_id]); 
+  }, [user_id, title, order, page]); 
 
   async function handleAddCart(product) {    
     const amount = 1;

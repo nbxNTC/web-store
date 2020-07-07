@@ -90,7 +90,7 @@ const Cart = () => {
           <li key={item.product.id}> 
             <div className="product">
               <img 
-                src={item.product.imgURL} 
+                src={item.product.image} 
                 alt="produto"              
               />
 

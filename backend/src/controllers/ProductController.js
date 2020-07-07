@@ -26,22 +26,45 @@ module.exports = {
         .orderBy('value', orderBy);;
              
         if (!title) {
-            res.header('X-Total-Count', count['count(*)']);
-            return res.json(products);  
+            res.append('X-Total-Count', count['count(*)']);
+            const serializedProducts = products.map(product => {
+                return {
+                  ...product,
+                  image: `http://192.168.0.102:3333/uploads/${product.image}`
+                };
+              });
+            return res.json(serializedProducts);  
         } else {
-            res.header('X-Total-Count', countByName['count(*)']);
-            return res.json(productsByName);  
+            res.append('X-Total-Count', countByName['count(*)']);
+            const serializedProducts = productsByName.map(product => {
+                return {
+                  ...product,
+                  image: `http://192.168.0.102:3333/uploads/${product.image}`
+                };
+              });
+            return res.json(serializedProducts);             
         }
     },    
     async create(req, res) {
-        const { title, value, plataform, imgURL } = req.body;
+        const { title, value, plataform } = req.body;
+        const client_id = req.headers.authorization;
+
         const [id] = await connection('products').insert({
             title,
             value,
             plataform,
-            imgURL
+            image: req.file.filename,
         });        
-        return res.json({ id });
+
+        const product_owner = {
+            'product_id': id,
+            'owner_id': client_id
+        }
+
+        const response = await connection('product_owner')
+            .insert(product_owner);
+
+        return res.json({ product_owner });
     },
     async delete(req, res) {
         const { id } = req.params;               
@@ -54,7 +77,7 @@ module.exports = {
     },
     async update(req, res) {
         const { id } = req.params;
-        const { title, value, plataform, imgURL } = req.body;
+        const { title, value, plataform } = req.body;
         if (title) {
             await connection('products')
             .where('id', id)
@@ -76,11 +99,11 @@ module.exports = {
                 'value': value,                
             });
         }
-        if (imgURL) {
+        if (req.file) {
             await connection('products')
             .where('id', id)
             .update({
-                'imgURL': imgURL,                
+                'image': req.file.filename,                
             });
         }        
 
