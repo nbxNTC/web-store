@@ -44,14 +44,22 @@ const ProductList = ({ title, order, page }) => {
 
   return (
     <ul className="items-grid">
-      {products.map(product => (
-        <li key={product.id} className="item">
-          <ProductCard 
-            product={product} 
-            handleAddCart={handleAddCart}
-          />            
-        </li>  
-      ))}
+      { products.length ?
+        <>
+          {products.map(product => (
+            <li key={product.id} className="item">
+              <ProductCard 
+                product={product} 
+                handleAddCart={handleAddCart}
+              />            
+            </li>  
+          ))}
+        </>
+      :      
+        <li>
+          Nenhum produto encontrado.
+        </li>        
+      }
     </ul>
   );
 }

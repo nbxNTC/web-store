@@ -53,11 +53,8 @@ const Products = () => {
                 Vender
               </span>
           </button>
-          <button onClick={() => { history.push('/cart') }} type="button" style={ {width: 130} }>
-              <FiShoppingCart size="18" color="#fff" />
-              <span>
-                Carrinho
-              </span>
+          <button onClick={() => { history.push('/cart') }} type="button" style={ {width: 60} }>
+              <FiShoppingCart size="18" color="#fff" />              
           </button>
           <button onClick={handleLogout} type="button" style={ {width: 90} }>
               <FiPower size="18" color="#fff" />
@@ -68,19 +65,16 @@ const Products = () => {
         </div>
       </header>
 
-      <h1>Produtos</h1>
-
-      
 
       <div className="search">
 
         <input 
           type="text"
-          placeholder="Título"
+          placeholder="Buscar produto"
           value={title}                        
           onChange={e => setTitle(e.target.value)}
           required
-        /> 
+          /> 
         <div className="pagination">
           <button onClick={() =>  handlePageLeft() } type="button" style={ {width: 40} }>
             <FiArrowLeft size="18" color="#fff" />          
@@ -91,6 +85,7 @@ const Products = () => {
           </button>
         </div>
       </div>
+          <h1>Produtos</h1>
 
       <ProductList
         title={title}  
