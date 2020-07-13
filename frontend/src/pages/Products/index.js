@@ -59,7 +59,7 @@ const Products = () => {
           <button onClick={handleLogout} type="button" style={ {width: 90} }>
               <FiPower size="18" color="#fff" />
               <span>
-                Sair
+                Sairs
               </span>
           </button>
         </div>
